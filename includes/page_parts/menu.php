@@ -4,26 +4,26 @@
  * This file contains the menu items, including the visual- and rights checks
  */
 
-$visuals = visuals_get($db);
+$visual = $visuals->get();
 
-if ($visuals['home'] == 1) {
+if ($visual['home'] == 1) {
     menuitem('Home', 'index.php');
 }
 
-if ($visuals['tips'] == 1) {
+if ($visual['tips'] == 1) {
     menuitem('Tips', 'index.php?page=1');
 }
 
-if ($visuals['tools'] == 1) {
+if ($visual['tools'] == 1) {
     menuitem('Tools', 'index.php?page=2');
 }
 
-if ($visuals['wiki'] == 1) {
+if ($visual['wiki'] == 1) {
     menuitem('Wiki', 'index.php?page=3');
 }
 
 if (isset($_SESSION['user']) && $_SESSION['user'] != NULL) {
-    if ($visuals['planning'] == 1) {
+    if ($visual['planning'] == 1) {
         menuitem('Planning', 'index.php?page=4');
     }
 }
@@ -34,7 +34,7 @@ if (isset($_SESSION['user']) && $_SESSION['user'] != NULL) {
         array('White Stars', 'index.php?page=5&sub=1')
     );
 
-    if ($visuals['logs'] == 1) {
+    if ($visual['logs'] == 1) {
         menuitem('Logs', $logs, $menu_id);
     }
 }
@@ -48,7 +48,7 @@ if (isset($_SESSION['user']) && $_SESSION['user'] != NULL) {
         array('Other progress', 'index.php?page=6&sub=4')
     );
 
-    if ($visuals['progress'] == 1) {
+    if ($visual['progress'] == 1) {
         menuitem('Progress', $progress, $menu_id);
     }
 }
@@ -56,75 +56,75 @@ if (isset($_SESSION['user']) && $_SESSION['user'] != NULL) {
 if (isset($_SESSION['user']) && $_SESSION['user'] != NULL) {
     $settings = array();
 
-    if (rights($db, 'perm_artifacts')) {
+    if ($rights->get('perm_artifacts')) {
         array_push($settings, array('Artifacts','index.php?page=7&sub=1'));
     }
 
-    if (rights($db, 'perm_cerberus')) {
+    if ($rights->get('perm_cerberus')) {
         array_push($settings, array('Cerberus', 'index.php?page=7&sub=2'));
     }
 
-    if (rights($db, 'perm_home')) {
+    if ($rights->get('perm_home')) {
         array_push($settings, array('Home', 'index.php?page=7&sub=3'));
     }
 
-    if (rights($db, 'perm_modules')) {
+    if ($rights->get('perm_modules')) {
         array_push($settings, array('Modules', 'index.php?page=7&sub=4'));
     }
 
-    if (rights($db, 'perm_perms')) {
+    if ($rights->get('perm_perms')) {
         array_push($settings, array('Permissions', 'index.php?page=7&sub=5'));
     }
 
-    if (rights($db, 'perm_planets')) {
+    if ($rights->get('perm_planets')) {
         array_push($settings, array('Planets', 'index.php?page=7&sub=6'));
     }
 
-    if(rights($db, 'perm_planning')) {
+    if($rights->get('perm_planning')) {
         array_push($settings, array('Planning', 'index.php?page=7&sub=7'));
     }
 
-    if(rights($db, 'perm_progress')) {
+    if($rights->get('perm_progress')) {
         array_push($settings, array('Progress', 'index.php?page=7&sub=8'));
     }
 
-    if(rights($db, 'perm_quickstats')) {
+    if($rights->get('perm_quickstats')) {
         array_push($settings, array('Quickstats', 'index.php?page=7&sub=9'));
     }
 
-    if(rights($db, 'perm_rates')) {
+    if($rights->get('perm_rates')) {
         array_push($settings, array('Rates', 'index.php?page=7&sub=10'));
     }
 
-    if(rights($db, 'perm_sheet')) {
+    if($rights->get('perm_sheet')) {
         array_push($settings, array('Sheet', 'index.php?page=7&sub=11'));
     }
 
-    if(rights($db, 'perm_ships')) {
+    if($rights->get('perm_ships')) {
         array_push($settings, array('Ships', 'index.php?page=7&sub=12'));
     }
 
-    if(rights($db, 'perm_spacestations')) {
+    if($rights->get('perm_spacestations')) {
         array_push($settings, array('Spacestations', 'index.php?page=7&sub=13'));
     }
 
-    if(rights($db, 'perm_tips')) {
+    if($rights->get('perm_tips')) {
         array_push($settings, array('Tips', 'index.php?page=7&sub=14'));
     }
 
-    if(rights($db, 'perm_tools')) {
+    if($rights->get('perm_tools')) {
         array_push($settings, array('Tools', 'index.php?page=7&sub=15'));
     }
 
-    if(rights($db, 'perm_users')) {
+    if($rights->get('perm_users')) {
         array_push($settings, array('Users', 'index.php?page=7&sub=16'));
     }
 
-    if(rights($db, 'perm_visuals')) {
+    if($rights->get('perm_visuals')) {
         array_push($settings, array('Visuals', 'index.php?page=7&sub=17'));
     }
 
-    if(rights($db, 'perm_white_star')) {
+    if($rights->get('perm_white_star')) {
         array_push($settings, array('White Star Status', 'index.php?page=7&sub=18'));
     }
 

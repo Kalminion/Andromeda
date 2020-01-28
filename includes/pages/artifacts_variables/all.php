@@ -12,7 +12,7 @@
 <?php
     if ($artifacts_variables->count() > 0) {
 
-        $maxlevel = $artifacts_values->max_artifact_level($artifact['id']);
+        $maxlevel = $artifacts_values->maxArtifactLevel($artifact['id']);
 ?>
         <table>
             <tr>
@@ -26,13 +26,13 @@
 ?>
             </tr>
 <?php
-            foreach($artifacts_variables->get_from_artifact($artifact['id']) as $variable_key => $variable_value) {
+            foreach($artifacts_variables->getFromArtifact($artifact['id']) as $variable_key => $variable_value) {
 ?>
                 <tr>
                     <td><a href="index.php?page=7&sub=1&action=10&artifacts_id=<?= $artifact['id']; ?>&artifacts_variables_id=<?= $variable_value['id']; ?>"><?= $variable_value['name']; ?></a></td>
 <?php
                     for($level = 1; $level <= $maxlevel; $level++) {
-                        $value = $artifacts_values->from_variable_and_level($variable_value['id'], $level);
+                        $value = $artifacts_values->fromVariableAndLevel($variable_value['id'], $level);
 ?>
                         <td><?= $value['value']; ?></td>
 <?php                        

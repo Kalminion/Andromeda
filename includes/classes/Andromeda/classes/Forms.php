@@ -29,7 +29,8 @@ class Forms
      * 
      */
 
-    private function formAction(&$action = NULL) {
+    private function formAction(&$action = NULL)
+    {
         if (isset($action) && $action != NULL) {
             $action = 'action="'.$action.'"';
         }
@@ -43,8 +44,8 @@ class Forms
      * 
      */
 
-    private function isValues($table) {
-
+    private function isValues($table)
+    {
         if (substr($table, -6) == 'values') {
             return true;
         }
@@ -60,7 +61,8 @@ class Forms
      * 
      */
 
-    private function makeId($name) {
+    private function makeId($name)
+    {
         return strtolower(str_replace(' ', '_',$name));
     }
 
@@ -71,7 +73,8 @@ class Forms
      * 
      */
 
-    private function setParent($table) {
+    private function setParent($table)
+    {
         // Set base name for parent variables from values
         $parent = substr($table, 0, -6);
 
@@ -86,14 +89,22 @@ class Forms
      * 
      */
 
-    private function getParent($table) {
+    private function getParent($table)
+    {
         $this->setParent($table);
 
         // Get parent variables
         $this->parents_content = $this->db->all('SELECT * FROM `'.$this->parent_table.'` WHERE `'.$this->parent_where.'` = ? AND `DELETED_BY` IS NULL', array($_GET[$this->parent_where]));
     }
 
-    private function drawInput($name) {
+    /**
+     * 
+     * Draw input line
+     * 
+     */
+
+    private function drawInput($name)
+    {
         echo '<div>';
 
         // Add underscores from names and make lowercase
@@ -111,8 +122,8 @@ class Forms
      * 
      */
 
-    private function addValuesForm($table) {
-
+    private function addValuesForm($table)
+    {
         // Echo the formfield "Level"
         echo $this->formfield_level;
 
@@ -131,7 +142,8 @@ class Forms
      * 
      */
 
-    private function setColumns($table) {
+    private function setColumns($table)
+    {
         $this->columns = $this->db->all('SELECT * FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA` = "andromeda" AND `TABLE_NAME` = ?', array($table));
     }
 
@@ -143,7 +155,8 @@ class Forms
      * 
      */
 
-    private function skip($column) {
+    private function skip($column)
+    {
         if (!in_array($column, $this->skip)) {
             return true;
         }
@@ -172,7 +185,8 @@ class Forms
      * 
      */
 
-    private function idField($name) {
+    private function idField($name)
+    {
         echo '<input type="hidden" name="'.$name.'" value="'.$_GET[$name].'" />';
     }
 
@@ -183,8 +197,8 @@ class Forms
      * 
      */
 
-    private function setRequired($is_nullable_field) {
-    
+    private function setRequired($is_nullable_field)
+    {
         if ($is_nullable_field == 'NO') {
             $this->required = 'required';
         }
@@ -198,11 +212,19 @@ class Forms
      * 
      */
     
-    private function setName($name) {
+    private function setName($name)
+    {
         return ucwords(str_replace('_', ' ', $name));
     }
 
-    private function buildInput($column_name, $data_type, $is_nullable) {
+    /**
+     * 
+     * Draw input fields based on the input type
+     * 
+     */
+
+    private function buildInput($column_name, $data_type, $is_nullable)
+    {
         // Start of the row
         echo '<div>';
 
@@ -236,8 +258,8 @@ class Forms
      * 
      */
 
-    private function addForm($table) {
-
+    private function addForm($table)
+    {
         $this->setColumns($table);
 
         // Loop through all column names from the table
@@ -270,8 +292,8 @@ class Forms
      * 
      */
 
-    public function add($table, $action = NULL) {
-
+    public function add($table, $action = NULL)
+    {
         // Set form action by reference
         $this->formAction($action);
 

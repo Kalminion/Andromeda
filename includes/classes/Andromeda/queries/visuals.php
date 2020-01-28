@@ -1,5 +1,18 @@
 <?php
 
+namespace Andromeda\Queries;
+
+use Andromeda\classes\Db;
+
+class Visuals {
+
+    private $db = null;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
+
     /**
      * 
      * Get all visual settings
@@ -7,8 +20,9 @@
      * 
      */
 
-    function visuals_get($db) {
-        return $db->row('SELECT * FROM `visuals`');
+    public function get()
+    {
+        return $this->db->row('SELECT * FROM `visuals`');
     }
 
     /**
@@ -24,8 +38,8 @@
      * 
      */
 
-    function visuals_edit($db, $visuals_home = NULL, $visuals_tips = NULL, $visuals_tools = NULL, $visuals_wiki = NULL, $visuals_planning = NULL, $visuals_logs = NULL, $visuals_progress = NULL) {
-
+    public function edit($visuals_home, $visuals_tips, $visuals_tools, $visuals_wiki, $visuals_planning, $visuals_logs, $visuals_progress)
+    {
         $visuals_home = checkbox($visuals_home);
         $visuals_tips = checkbox($visuals_tips);
         $visuals_tools = checkbox($visuals_tools);
@@ -34,6 +48,6 @@
         $visuals_logs = checkbox($visuals_logs);
         $visuals_progress = checkbox($visuals_progress);
 
-        $db->none('UPDATE `visuals` SET `home` = ?, `tips` = ?, `tools` = ?, `wiki` = ?, `planning` = ?, `logs` = ?, `progress` = ?, `editted_by` = ?, `editted_on` = ?', array($visuals_home, $visuals_tips, $visuals_tools, $visuals_wiki, $visuals_planning, $visuals_logs, $visuals_progress, $_SESSION['user_id'], date('Y-m-d H:i:s')));
+        $this->db->none('UPDATE `visuals` SET `home` = ?, `tips` = ?, `tools` = ?, `wiki` = ?, `planning` = ?, `logs` = ?, `progress` = ?, `editted_by` = ?, `editted_on` = ?', array($visuals_home, $visuals_tips, $visuals_tools, $visuals_wiki, $visuals_planning, $visuals_logs, $visuals_progress, $_SESSION['user_id'], date('Y-m-d H:i:s')));
     }
-?>
+}

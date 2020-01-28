@@ -49,7 +49,9 @@ $forms = new Base\Forms($db);
  * 
  */
 
-require_once('includes/queries/all.php');
+require_once('includes/classes/Andromeda/queries/all.php');
+
+$rights = new Base\Rights($db);
 
 /**
  * 
@@ -74,7 +76,7 @@ require_once('includes/functions/forms.php');
  * 
  */
 
-require_once('includes/functions/rights.php');
+//require_once('includes/functions/rights.php');
 
 /**
  * 

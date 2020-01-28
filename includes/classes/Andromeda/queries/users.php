@@ -1,5 +1,18 @@
 <?php
 
+namespace Andromeda\Queries;
+
+use Andromeda\classes\Db;
+
+class Users {
+
+    private $db = null;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
+
     /**
      * 
      * Counts all users
@@ -7,8 +20,9 @@
      * 
      */
 
-    function users_count($db) {
-        return $db->one('SELECT COUNT(*) FROM `users` WHERE `deleted_by` IS NULL');
+    public function count()
+    {
+        return $this->db->one('SELECT COUNT(*) FROM `users` WHERE `deleted_by` IS NULL');
     }
 
     /**
@@ -18,7 +32,8 @@
      * 
      */
 
-    function users_all($db) {
+    public function all()
+    {
         return $db->all('SELECT *  FROM `users` WHERE `deleted_by` IS NULL ORDER BY `name` ASC');
     }
 
@@ -30,8 +45,9 @@
      * 
      */
 
-    function users_from_name($db, $name) {
-        return $db->row('SELECT * FROM `users` WHERE `name` = ? AND `deleted_by` IS NULL', array($name));
+    public function fromName($name)
+    {
+        return $this->db->row('SELECT * FROM `users` WHERE `name` = ? AND `deleted_by` IS NULL', array($name));
     }
 
     /**
@@ -42,8 +58,9 @@
      * 
      */
 
-    function users_get($db, $user_id) {
-        return $db->row('SELECT * FROM `users` WHERE `id` = ? AND `deleted_by` IS NULL',array($user_id));
+    public function get($user_id)
+    {
+        return $this->db->row('SELECT * FROM `users` WHERE `id` = ? AND `deleted_by` IS NULL',array($user_id));
     }
 
     /**
@@ -53,8 +70,9 @@
      * 
      */
 
-    function users_delete($db, $user_id) {
-        $db->none('UPDATE `users` SET `deleted_by` = ?, `deleted_on` = ? WHERE `id` = ?', array($_SESSION['user_id'], date('Y-m-d H:i:s'), $user_id));
+    public function delete($user_id)
+    {
+        $this->db->none('UPDATE `users` SET `deleted_by` = ?, `deleted_on` = ? WHERE `id` = ?', array($_SESSION['user_id'], date('Y-m-d H:i:s'), $user_id));
     }
 
     /**
@@ -68,9 +86,10 @@
      * 
      */
 
-    function users_add($db, $name, $discord_id, $permission_id) {
-        $pass = substr(md5('KLM/FlyingDutchmen'.rand(1,99999).date('s-v-u')), 4, 10);
-        $db->none('INSERT INTO `users` (`name`, `discord_id`, `password`, `permissions_id`, `added_by`, `added_on`) VALUES (?, ?, ?, ?, ?, ?)', array($name, $discord_id, $pass, $permission_id, $_SESSION['user_id'], date('Y-m-d H:i:s')));
+    public function add($name, $discord_id, $permission_id)
+    {
+        $pass = substr(md5('KLM/FlyingDutchmen'.rand(1,99999).date('s-v-u')), 4, 10); // This is going to be changed in the future, to a seperate function
+        $this->db->none('INSERT INTO `users` (`name`, `discord_id`, `password`, `permissions_id`, `added_by`, `added_on`) VALUES (?, ?, ?, ?, ?, ?)', array($name, $discord_id, $pass, $permission_id, $_SESSION['user_id'], date('Y-m-d H:i:s')));
     }
 
     /**
@@ -83,8 +102,9 @@
      * 
      */
 
-    function users_edit($db, $id, $name, $discord_id, $permission_id) {
-        $db->none('UPDATE `users` SET `name` = ?, `discord_id` = ?, `permissions_id` = ?, `editted_by` = ?, `editted_on` = ? WHERE `id` = ?', array($name, $discord_id, $permission_id, $_SESSION['user_id'], date('Y-m-d H:i:s'), $id));
+    public function edit($id, $name, $discord_id, $permission_id)
+    {
+        $this->db->none('UPDATE `users` SET `name` = ?, `discord_id` = ?, `permissions_id` = ?, `editted_by` = ?, `editted_on` = ? WHERE `id` = ?', array($name, $discord_id, $permission_id, $_SESSION['user_id'], date('Y-m-d H:i:s'), $id));
     }
 
     /**
@@ -95,10 +115,10 @@
      * 
      */
 
-    function login($db, $name, $password) {
-
+    public function login($name, $password)
+    {
         // Get user from database
-        $user = users_from_name($db, $name);
+        $user = fromName($name);
     
         if (!$user || $user == NULL) {
             echo 'No user found';
@@ -108,4 +128,4 @@
             }
         }
     }
-?>
+}
