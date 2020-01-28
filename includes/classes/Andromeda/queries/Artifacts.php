@@ -59,12 +59,12 @@ class artifacts {
 
     public function delete($id)
     {
-        foreach($GLOBALS['artifacts_variables']->get_from_artifact($id) as $variable_key => $variable_value) {
+        foreach($GLOBALS['artifacts_variables']->getFromArtifact($id) as $variable_key => $variable_value) {
             $this->db->none('UPDATE `artifacts_variables` SET `deleted_by` = ?, `deleted_on` = ? WHERE `id` = ?', array($_SESSION['user'], date('Y-m-d H:i:s'), $variable_value['id']));
             $this->db->none('UPDATE `artifacts_levels` SET `deleted_by` = ?, `deleted_on` = ? WHERE `artifacts_variables_id` = ?', array($_SESSION['user'], date('Y-m-d H:i:s'), $variable_value['id']));
         }
-        $this->db->none('UPDATE `artifacts_statics` SET `deleted_by` = ?, `deleted_on` = ? WHERE `artifacts_id` = ?', array($_SESSION['user'], date('Y-m-d H:i:s'), artifacts_id($id)));
-        $this->db->none('UPDATE `artifacts` SET `deleted_by` = ?, `deleted_on` = ? WHERE `id` = ?', array($_SESSION['user'], date('Y-m-d H:i:s'), artifacts_id($id)));
+        $this->db->none('UPDATE `artifacts_statics` SET `deleted_by` = ?, `deleted_on` = ? WHERE `artifacts_id` = ?', array($_SESSION['user'], date('Y-m-d H:i:s'), $id));
+        $this->db->none('UPDATE `artifacts` SET `deleted_by` = ?, `deleted_on` = ? WHERE `id` = ?', array($_SESSION['user'], date('Y-m-d H:i:s'), $id));
     }
 
     /**

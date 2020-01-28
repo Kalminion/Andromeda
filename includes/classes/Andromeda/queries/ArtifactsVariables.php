@@ -45,7 +45,7 @@ class ArtifactsVariables
      * 
      */
 
-    public function get_from_artifact($artifact_id)
+    public function getFromArtifact($artifact_id)
     {
         return $this->db->all('SELECT * FROM `artifacts_variables` WHERE `artifacts_id` = ? AND `deleted_by` IS NULL', array($artifact_id));
     }

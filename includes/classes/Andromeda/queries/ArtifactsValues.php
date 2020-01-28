@@ -21,7 +21,7 @@ class ArtifactsValues {
      * 
      */
 
-    public function count_levels($variable_id)
+    public function countLevels($variable_id)
     {
         return $this->db->one('SELECT MAX(`level`) FROM `artifacts_values` WHERE `artifacts_variables_id` = ? AND `deleted_by` IS NULL',array($variable_id));
     }
@@ -34,7 +34,7 @@ class ArtifactsValues {
      * 
      */
 
-    public function max_artifact_level($artifact_id)
+    public function maxArtifactLevel($artifact_id)
     {
         $maxlevel = 1;
 
@@ -42,8 +42,8 @@ class ArtifactsValues {
 
         foreach($variables as $variable_key => $variable_value) {
 
-            if ($maxlevel < $this->count_levels($variable_value['id'])) {
-                $maxlevel = $this->count_levels($variable_value['id']);
+            if ($maxlevel < $this->countLevels($variable_value['id'])) {
+                $maxlevel = $this->countLevels($variable_value['id']);
             }
         }
 
@@ -59,7 +59,7 @@ class ArtifactsValues {
      * 
      */
 
-    public function from_variable_and_level($variables_id, $level)
+    public function fromVariableAndLevel($variables_id, $level)
     {
         return $this->db->row('SELECT * FROM `artifacts_values` WHERE `artifacts_variables_id` = ? AND `level` = ? AND `deleted_by` IS NULL', array($variables_id, $level));
     }
@@ -87,7 +87,7 @@ class ArtifactsValues {
      * 
      */
 
-    public function count_from_variable_and_level($variable_id, $level)
+    public function countFromVariableAndLevel($variable_id, $level)
     {
         return $this->db->one('SELECT COUNT(*) FROM `artifacts_values` WHERE `artifacts_variables_id` = ? AND `level` = ? AND `deleted_by` IS NULL',array($variable_id, $level));
     }
@@ -102,7 +102,7 @@ class ArtifactsValues {
 
     public function delete($variable_id, $level)
     {
-        foreach($GLOBALS['artifacts_variables']->get_from_artifact($variable_id) as $variable_key => $variable_value) {
+        foreach($GLOBALS['artifacts_variables']->getFromArtifact($variable_id) as $variable_key => $variable_value) {
             $this->db->none('UPDATE `artifacts_values` SET `deleted_by` = ?, `deleted_on` = ? WHERE `artifacts_variables_id` = ? AND `level` = ?', array($_SESSION['user'], date('Y-m-d H:i:s'), $variable_value['id'], $level));
         }
     }
@@ -117,10 +117,10 @@ class ArtifactsValues {
      * 
      */
 
-    public function add_all($artifact_id, $level)
+    public function addAll($artifact_id, $level)
     {   
-        foreach($GLOBALS['artifacts_variables']->get_from_artifact($artifact_id) as $variable_key => $variable_value) {            
-            $value = $this->add_set($_POST[$variable_value['id']]);
+        foreach($GLOBALS['artifacts_variables']->getFromArtifact($artifact_id) as $variable_key => $variable_value) {            
+            $value = $this->addSet($_POST[$variable_value['id']]);
             $this->add($variable_value['id'], $level, $value);   
         }
     }
@@ -135,7 +135,7 @@ class ArtifactsValues {
      * 
      */
 
-    public function add_set($check_value)
+    public function addSet($check_value)
     {    
         $value = 'No value';
 
@@ -180,7 +180,7 @@ class ArtifactsValues {
             if (!in_array($key, $skip)) {
 
                 // Count if values are already in database. If so, update. If not, insert
-                $count = $this->count_from_variable_and_level($key, $_POST['level']);
+                $count = $this->countFromVariableAndLevel($key, $_POST['level']);
 
                 if ($count > 0) {
                     $this->edit($value, $key, $level);

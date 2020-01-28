@@ -85,7 +85,7 @@ class ArtifactsStatics
      * 
      */
 
-    public function artifacts_statics_edit($id, $name, $value)
+    public function edit($id, $name, $value)
     {
         $this->db->none('UPDATE `artifacts_statics` SET `name` = ?, `value` = ?, `editted_by` = ?, `editted_on` = ? WHERE `id` = ?', array($name, $value, $_SESSION['user'], date('Y-m-d H:i:s'), $id));
     }
