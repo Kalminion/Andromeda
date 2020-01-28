@@ -1,0 +1,57 @@
+.container {
+    grid-template-rows: 120px 120px 120px 1fr;
+}
+
+/*
+    HEADER
+*/
+
+.header_text {
+    font-size: 60px;
+}
+
+.header_text span {
+    font-size: 23px;
+}
+
+.header_text img {
+    height: 40px;
+}
+
+/*
+    CENTER
+*/
+
+.center {
+    grid-column-start: 1;
+    grid-column-end: 13;
+    grid-row-start: 4;
+    grid-row-end: 5;
+
+    display: grid;
+    grid-template-columns: 200px 1fr; 
+}
+
+/*
+    MENU
+*/
+
+.menu_slider {
+    display: none;
+}
+
+.menu_slider_content {
+    display: none;
+}
+
+nav {
+    grid-column: 1/2;
+}
+
+/*
+    TABLES
+*/
+
+.tablerow {
+    grid-column: 1/13
+}
