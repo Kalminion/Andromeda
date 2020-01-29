@@ -11,7 +11,7 @@ if (isset($_GET['sub']) && $_GET['sub'] != NULL) {
             include('includes/pages/artifacts/main.php');
             break;
         case '2':
-            // Cerberus
+            include('includes/pages/cerberus/main.php');
             break;
         case '3':
             // Home

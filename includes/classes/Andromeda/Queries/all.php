@@ -13,3 +13,4 @@ $artifacts = new Query\Artifacts($db);
 $permisssions = new Query\Permissions($db);
 $users = new Query\Users($db);
 $visuals = new Query\Visuals($db);
+$cerbs= new Query\Pages($db, 'cerberus');

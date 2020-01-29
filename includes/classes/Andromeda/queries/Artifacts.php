@@ -4,7 +4,7 @@ namespace Andromeda\Queries;
 
 use Andromeda\classes\Db;
 
-class artifacts {
+class Artifacts {
 
     private $db = null;
 
