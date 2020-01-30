@@ -14,7 +14,5 @@
 </section>
 
 <script>
-    $.getJSON('includes/json/results.json', function(json) {
-        $('#cerberusContent').append(json);
-    });
+    getContent('cerberus');
 </script>

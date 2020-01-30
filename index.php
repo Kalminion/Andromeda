@@ -26,6 +26,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="includes/js/menu.js"></script>
     <script src="includes/js/submenu.js"></script>
+    <script src="includes/js/all.js"></script>
 </head>
 
 <body>
