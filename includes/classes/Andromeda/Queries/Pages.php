@@ -16,7 +16,7 @@ class Pages extends Queries
         if ($this->getCount() > 0) {
             $this->all();
         } else {
-            echo 'No content found';
+            $this->parse(array('No content found'));
         }
     }
 }

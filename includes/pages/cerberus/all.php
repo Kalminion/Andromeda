@@ -12,7 +12,3 @@
 
 <section id="cerberusContent">
 </section>
-
-<script>
-    getContent('cerberus');
-</script>

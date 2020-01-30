@@ -13,10 +13,10 @@ function getContent(containerName) {
                 document.getElementById(container).append(button);
 
                 // Draw button link
-                var link = document.createElement('a');
-                link.setAttribute('href', link);
-                link.setAttribute('id', name + 'link' + index);
-                document.getElementById(name + index).append(link);
+                var linkref = document.createElement('a');
+                linkref.setAttribute('href', link);
+                linkref.setAttribute('id', name + 'link' + index);
+                document.getElementById(name + index).append(linkref);
 
                 // Draw button name
                 document.getElementById(name + 'link' + index).append(name);
@@ -41,12 +41,15 @@ function getContent(containerName) {
                 document.getElementById(containerName + "Content").append(tableRow);
 
                 drawName(item, index, rowName);
-                drawButton('Statics', index, rowName, 'index.php?page=7&sub=2');
-                drawButton('Edit', index, rowName, 'index.php?page=7&sub=2');
-                drawButton('Delete', index, rowName, 'index.php?page=7&sub=2');
+                drawButton('Statics', index, rowName, window.location.href + 'action=1');
+                drawButton('Edit', index, rowName, window.location.href + 'action=2');
+                drawButton('Delete', index, rowName, window.location.href + 'action=3');
             }
-            
-            myObj.forEach(loop);
+            if (myObj[0] == 'No content found') {
+                document.getElementById(containerName + 'Content').append(myObj[0]);
+            } else {
+                myObj.forEach(loop);
+            }
         }
     };
 
