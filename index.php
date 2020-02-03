@@ -26,9 +26,21 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="includes/js/menu.js"></script>
     <script src="includes/js/submenu.js"></script>
-    <script src="includes/js/page.js"></script>
+    <!--<script src="includes/js/page.js"></script>
     <script src="includes/js/all.js"></script>
-    <script src="includes/js/contentSwitch.js"></script>
+    <script src="includes/js/grabJson.js"></script>
+    <script src="includes/js/contentSwitch.js"></script>-->
+    <script src="includes/js/page.js"></script>
+    <script src="includes/js/request.js"></script>
+    <script src="includes/js/drawButtonCell.js"></script>
+    <script src="includes/js/drawNameCell.js"></script>
+    <script src="includes/js/drawNameLinkCell.js"></script>
+    <script src="includes/js/drawTableRow.js"></script>
+    <script src="includes/js/drawAddButton.js"></script>
+
+    <script src="includes/js/pages.js"></script>
+    <script src="includes/js/pageAll.js"></script>
+    <script src="includes/js/pageEdit.js"></script>
 </head>
 
 <body>

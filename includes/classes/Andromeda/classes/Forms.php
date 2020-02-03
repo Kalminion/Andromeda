@@ -279,7 +279,6 @@ class Forms
 
                 // Draw input line
                 $this->buildInput($value['COLUMN_NAME'], $value['DATA_TYPE'], $value['IS_NULLABLE']);
-
             }
         }
     }
@@ -310,6 +309,27 @@ class Forms
 
             // Add form identifier
             echo '<input type="hidden" name="form" value="add_'.$table.'" />';
+
+            // Submit and end
+            echo '<div><input type="submit" value="Save" /></div>';
+        echo '</form>';
+    }
+
+    public function edit($table, $action = NULL)
+    {
+        // Set form action by reference
+        $this->formAction($action);
+
+        echo '<form method="post" '.$action.' >';
+
+            if ($this->isValues($table)) {
+
+            } else {
+
+            }
+
+            // Add form identifier
+            echo '<input type="hidden" name="form" value="edit_'.$table.'" />';
 
             // Submit and end
             echo '<div><input type="submit" value="Save" /></div>';

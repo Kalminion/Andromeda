@@ -8,16 +8,17 @@ if (isset($_GET['sub']) && $_GET['sub'] != NULL) {
     
     switch($_GET['sub']) {
         case '1':
-            include('includes/pages/artifacts/main.php');
+            include('includes/pages/settings/artifacts/main.php');
             break;
         case '2':
-            include('includes/pages/cerberus/main.php');
+            include('includes/pages/settings/cerberus/main.php');
             break;
         case '3':
             // Home
             break;
         case '4':
             // Modules
+            include('includes/pages/settings/modules/main.php');
             break;
         case '5':
             // Permissions

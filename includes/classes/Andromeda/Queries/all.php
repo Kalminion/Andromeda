@@ -10,7 +10,9 @@ $artifacts_statics = new Query\ArtifactsStatics($db);
 $artifacts_values = new Query\ArtifactsValues($db);
 $artifacts_variables = new Query\ArtifactsVariables($db);    
 $artifacts = new Query\Artifacts($db);
+$cerberus = new Query\Queries($db, 'cerberus');
 $permisssions = new Query\Permissions($db);
 $users = new Query\Users($db);
 $visuals = new Query\Visuals($db);
+
 $cerbs= new Query\Pages($db, 'cerberus');

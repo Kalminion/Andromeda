@@ -19,4 +19,8 @@ class Pages extends Queries
             $this->parse(array('No content found'));
         }
     }
+
+    public function find($id) {
+        $this->get($id);
+    }
 }

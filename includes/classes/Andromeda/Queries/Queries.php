@@ -36,4 +36,10 @@ class Queries {
         $count = $this->db->one('SELECT COUNT(*) FROM `'.$this->table.'` WHERE `deleted_by` IS NULL');
         $this->parse($count);
     }
+
+    public function get($id)
+    {
+        $get = $this->db->row('SELECT * FROM `'.$this->table.'` WHERE `id` = ? AND `deleted_by` IS NULL', array($id));
+        $this->parse($get);
+    }
 }
