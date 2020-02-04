@@ -16,8 +16,10 @@ class Rights
     {
         $this->db = $db;
         
-        $user = $this->db->row('SELECT * FROM `users` WHERE `id` = ?', array($_SESSION['user']));
-        $this->permissions = $this->db->row('SELECT * FROM `permissions` WHERE `id` = ?', array($user['permissions_id']));
+        if (isset($_SESSION['user']) && $_SESSION['user'] != null) {
+            $user = $this->db->row('SELECT * FROM `users` WHERE `id` = ?', array($_SESSION['user']));
+            $this->permissions = $this->db->row('SELECT * FROM `permissions` WHERE `id` = ?', array($user['permissions_id']));
+        }
     }
 
     /**

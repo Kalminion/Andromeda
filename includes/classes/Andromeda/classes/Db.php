@@ -77,7 +77,6 @@ class Db
 
     public function row($query, $variables = array())
     {
-
         try {
             $run = $this->db_pdo->prepare($query);
             $run->execute($variables);

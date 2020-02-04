@@ -118,7 +118,7 @@ class Users {
     public function login($name, $password)
     {
         // Get user from database
-        $user = fromName($name);
+        $user = $this->fromName($name);
     
         if (!$user || $user == NULL) {
             echo 'No user found';
