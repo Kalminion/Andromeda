@@ -9,8 +9,8 @@ class pages {
 
     // Build a reference link, with only specifying the action parameter
     makeLink(action) {
-        var link = 'index.php?page=' + page('page') + '&sub=' + page('sub') + '&action=' + action;
-        var id = page('id') ?? null;
+        var link = 'index.php?page=' + this.page('page') + '&sub=' + this.page('sub') + '&action=' + action;
+        var id = this.page('id') ?? null;
         if (id != null) {
             link += '&id=' + id;
         }
@@ -19,7 +19,7 @@ class pages {
 
     // Append a single div to the document
     drawDiv(destination, HtmlId, HtmlClass) {
-        var element = document.createElement(HtmlTag);
+        var element = document.createElement('div');
         element.setAttribute('id', HtmlId);
         element.setAttribute('class', HtmlClass);
         document.getElementById(destination).append(element);
@@ -27,7 +27,7 @@ class pages {
 
     // Append a single anchor to the document
     drawA(destination, HtmlId, HtmlClass, HtmlHref) {
-        var element = document.createElement(HtmlTag);
+        var element = document.createElement('a');
         element.setAttribute('id', HtmlId);
         element.setAttribute('class', HtmlClass);
         element.setAttribute('href', HtmlHref);
@@ -40,17 +40,17 @@ class pages {
         // Div id
         var divTarget = 'nameCell' + key;
 
-        drawDiv(destination, divTarget, 'tablecell namecell');
+        this.drawDiv(destination, divTarget, 'tablecell namecell');
     }
 
     // Draw the naming cell inside the table row, which is a link to a deeper level
     drawNameLinkCell(destination, key, link, name) {
-        drawLinkCell(destination, key, link, name, 'name');
+        this.drawLinkCell(destination, key, link, name, 'name');
     }
 
     // Draw the action buttons behind the namecell
     drawButtonCell(destination, key, link, name) {
-        drawLinkCell(destination, key, link, name, 'button');
+        this.drawLinkCell(destination, key, link, name, 'button');
     }
 
     drawLinkCell(destination, key, link, name, celltype) {
@@ -66,8 +66,8 @@ class pages {
 
         var divCellClass = 'tablecell ' + celltype + 'cell';
 
-        drawDiv(mainTarget, divTarget, divCellClass);
-        drawA(divTarget, linkTarget, '', link);
+        this.drawDiv(mainTarget, divTarget, divCellClass);
+        this.drawA(divTarget, linkTarget, '', link);
         document.getElementById(linkTarget).append(name);
     }
 
@@ -77,7 +77,7 @@ class pages {
         // Div id
         var divTarget = 'tableRow' + key; // Maybe prefix with destination variable
 
-        drawDiv(mainTarget, divTarget, 'tablerow');
+        this.drawDiv(mainTarget, divTarget, 'tablerow');
     }
 
     // Draw add button
@@ -86,7 +86,7 @@ class pages {
         // Link id
         var linkTarget = name + 'AddButton';
 
-        drawA(mainTarget, linkTarget, 'button add', link);
+        this.drawA(mainTarget, linkTarget, 'button add', link);
         document.getElementById(linkTarget).append(name);
     }
 
@@ -102,14 +102,20 @@ class pages {
             var divTarget = 'tableRow' + key;
 
             // Set links
-            var editLink = makeLink('2');
-            var deleteLink = makeLink('3');
+            var nameLink = this.makeLink('1');
+            var editLink = this.makeLink('2');
+            var deleteLink = this.makeLink('3');
 
             // Draw!
-            drawTableRow(mainTarget, key);
-            drawNameLinkCell(divTarget, key, link, name);
-            drawButtonCell(divTarget, key, editLink, 'Edit');
-            drawButtonCell(divTarget, key, deleteLink, 'Delete');
+            this.drawTableRow(mainTarget, key);
+            this.drawNameLinkCell(divTarget, key, nameLink, name);
+            this.drawButtonCell(divTarget, key, editLink, 'Edit');
+            this.drawButtonCell(divTarget, key, deleteLink, 'Delete');
         }
     }
+}
+
+function executePages(json, mainTarget) {
+    var newPage = new pages();
+    newPage.pageAll(json, mainTarget);
 }
