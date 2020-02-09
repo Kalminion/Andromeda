@@ -1,5 +1,13 @@
 class pages {
 
+    // Switch table name to display name
+    nameSwitch(tableName) {
+        switch(tableName) {
+            case 'modules_types':
+                return 'Modules types';
+        }
+    }
+
     // Get url parameters
     page(find) {
         var search = new URL(window.location.href);
@@ -36,7 +44,7 @@ class pages {
 
     // Draw the naming cell inside the table row
     drawNameCell(destination, key) {
-
+        
         // Div id
         var divTarget = 'nameCell' + key;
 
@@ -54,9 +62,9 @@ class pages {
     }
 
     drawLinkCell(destination, key, link, name, celltype) {
-        
+
         // Main target id
-        var mainTarget = destination + key;
+        var mainTarget = destination;
 
         // Div id
         var divTarget = 'Button' + name + key; // Maybe prefix with destination variable
@@ -90,8 +98,25 @@ class pages {
         document.getElementById(linkTarget).append(name);
     }
 
+    // Draw title
+    drawTitle(mainTarget) {
+        var title = docoment.createElement('div');
+        title.setAttribute('class', 'title');
+        title.setAttribute('id', mainTarget + 'Title');
+        document.getElementById()
+    }
+
+    // Draw section, always places the section inside the <main> element
+    drawSection(name) {
+        var section = document.createElement('section');
+        section.setAttribute('id', name);
+        document.getElementById('main').append(section);
+    }
+
     // Build table page
     pageAll(json, mainTarget) {
+        this.drawSection(mainTarget);
+
         for (var item in json) {
 
             // Set json values
@@ -102,7 +127,7 @@ class pages {
             var divTarget = 'tableRow' + key;
 
             // Set links
-            var nameLink = this.makeLink('1');
+            var nameLink = this.makeLink('4');
             var editLink = this.makeLink('2');
             var deleteLink = this.makeLink('3');
 
@@ -112,6 +137,12 @@ class pages {
             this.drawButtonCell(divTarget, key, editLink, 'Edit');
             this.drawButtonCell(divTarget, key, deleteLink, 'Delete');
         }
+
+        // Set add button link
+        var addLink = this.makeLink('1');
+
+        // Draw add button
+        this.drawAddButton(mainTarget, addLink, 'Add ' + this.nameSwitch(mainTarget));
     }
 }
 
