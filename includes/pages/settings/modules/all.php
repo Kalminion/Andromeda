@@ -1,5 +1,7 @@
-<section id="modules_types"></section>
+<div class="title">
+    All module types
+</div>
 
 <script>
-    var result = request(executePages, 'modules_types', 'all');
+    request(executePages, 'modules_types', 'all');
 </script>
