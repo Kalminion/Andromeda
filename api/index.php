@@ -1,22 +1,23 @@
 <?php
 
 // Database connection
-require_once('../classes/Andromeda/Classes/Db.php');
-require_once('../connections/config.php');
+require_once('../includes/classes/Andromeda/Classes/Db.php');
+require_once('../includes/connections/config.php');
 
 use Andromeda\Classes as Base;
 $db = new Base\Db($db_name, $db_host, $db_username, $db_password);
-
-
 
 // Handling
 $headers = getallheaders();
 
 $table = $headers['target'];
-$rows = $headers['select'];
+$rows = null;
 $column = null;
 $selector = null;
 
+if (isset($headers['select'])) {
+    $rows = $headers['select'];
+}
 if (isset($headers['column'])) {
     $column = $headers['column'];
 }
@@ -79,10 +80,10 @@ if (in_array($table, $acceptedTable)) {
         case 'get':
             $return = $db->row('SELECT * FROM `'.$table.'` WHERE `'.$column.'` = ? AND `deleted_by` IS NULL', array($selector));
             break;
+        default:
+            $return = 'Variable "$rows" not set';
     }
 }
-
-
 
 // Returning
 header('Content-Type: application/json');

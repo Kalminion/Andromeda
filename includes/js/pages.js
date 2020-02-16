@@ -8,6 +8,21 @@ class pages {
         }
     }
 
+    pageSwitch() {
+        switch(this.page('action') % 4) {
+            case 0:
+                return 'list';
+            case 0.25:
+                return 'add';
+            case 0.5:
+                return 'edit';
+            case 0.75:
+                return 'delete';
+            default:
+                return 'list';
+        }
+    }
+
     // Get url parameters
     page(find) {
         var search = new URL(window.location.href);
@@ -100,10 +115,11 @@ class pages {
 
     // Draw title
     drawTitle(mainTarget) {
-        var title = docoment.createElement('div');
+        var title = document.createElement('div');
         title.setAttribute('class', 'title');
-        title.setAttribute('id', mainTarget + 'Title');
-        document.getElementById()
+        title.setAttribute('id', 'title');
+        document.getElementById('main').append(title);
+        document.getElementById('title').append(this.nameSwitch(mainTarget));
     }
 
     // Draw section, always places the section inside the <main> element
@@ -113,8 +129,26 @@ class pages {
         document.getElementById('main').append(section);
     }
 
+    // Build the corresponding page
+    pageBuilder(json, mainTarget) {
+        switch(this.pageSwitch()) {
+            case 'list':
+                this.pageAll(json, mainTarget);
+                break;
+            case 'add':
+                break;
+            case 'edit':
+                break;
+            case 'delete':
+                break;
+            default:
+                this.pageAll(json, mainTarget);
+        }
+    }
+
     // Build table page
     pageAll(json, mainTarget) {
+        this.drawTitle(mainTarget);
         this.drawSection(mainTarget);
 
         for (var item in json) {
@@ -148,5 +182,5 @@ class pages {
 
 function executePages(json, mainTarget) {
     var newPage = new pages();
-    newPage.pageAll(json, mainTarget);
+    newPage.pageBuilder(json, mainTarget);
 }

@@ -1,6 +1,6 @@
 function request(callback, target, select, column = null, selector = null) {
     var request = new XMLHttpRequest();
-    var location = 'includes/functions/test.php';
+    var location = 'api'; // Folder location, whole path is /api/index.php
     
     request.open("GET", location);
     request.setRequestHeader('target', target);
